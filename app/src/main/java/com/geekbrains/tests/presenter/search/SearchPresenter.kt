@@ -1,6 +1,5 @@
 package com.geekbrains.tests.presenter.search
 
-import android.view.View
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.repository.GitHubRepository
 import com.geekbrains.tests.repository.GitHubRepository.GitHubRepositoryCallback
