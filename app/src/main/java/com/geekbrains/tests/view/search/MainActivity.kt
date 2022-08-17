@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private val adapter = SearchResultAdapter()
-    private val presenter: PresenterSearchContract = SearchPresenter(this, createRepository())
+    private val presenter: PresenterSearchContract = SearchPresenter(createRepository())
     private var totalCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun setUI() {
+		presenter.onAttach(this)
         toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
         }
@@ -100,4 +101,9 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     companion object {
         const val BASE_URL = "https://api.github.com"
     }
+
+	override fun onStop() {
+		presenter.onDetach()
+		super.onStop()
+	}
 }
