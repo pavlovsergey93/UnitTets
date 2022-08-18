@@ -102,8 +102,8 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         const val BASE_URL = "https://api.github.com"
     }
 
-	override fun onStop() {
+	override fun onDestroy() {
+		super.onDestroy()
 		presenter.onDetach()
-		super.onStop()
 	}
 }
