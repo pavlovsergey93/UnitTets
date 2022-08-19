@@ -2,7 +2,6 @@ package com.geekbrains.tests.presenter.search
 
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.presenter.RepositoryContract
-import com.geekbrains.tests.repository.GitHubRepository
 import com.geekbrains.tests.repository.RepositoryCallback
 import com.geekbrains.tests.view.ViewContract
 import com.geekbrains.tests.view.search.ViewSearchContract
@@ -28,7 +27,7 @@ internal class SearchPresenter internal constructor(
 	}
 
 	override fun onAttach(view: ViewContract) {
-		if (view != this.viewContract || view == null) {
+		if (view != this.viewContract) {
 			this.viewContract = view as ViewSearchContract
 		}
 	}
