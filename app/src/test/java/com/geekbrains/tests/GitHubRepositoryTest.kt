@@ -2,8 +2,8 @@ package com.geekbrains.tests
 
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.repository.GitHubApi
-import com.geekbrains.tests.repository.GitHubRepository
-import com.geekbrains.tests.repository.GitHubRepository.GitHubRepositoryCallback
+import repository.GitHubRepository
+import repository.GitHubRepository.GitHubRepositoryCallback
 import okhttp3.Request
 import okio.Timeout
 import org.junit.Before
