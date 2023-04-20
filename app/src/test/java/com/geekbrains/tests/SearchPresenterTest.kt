@@ -3,7 +3,7 @@ package com.geekbrains.tests
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.model.SearchResult
 import com.geekbrains.tests.presenter.search.SearchPresenter
-import com.geekbrains.tests.repository.GitHubRepository
+import repository.GitHubRepository
 import com.geekbrains.tests.view.search.ViewSearchContract
 import org.junit.Assert.*
 import org.junit.Before
@@ -30,7 +30,7 @@ class SearchPresenterTest {
         //Раньше было @RunWith(MockitoJUnitRunner.class) в аннотации к самому классу (SearchPresenterTest)
         MockitoAnnotations.initMocks(this)
         //Создаем Презентер, используя моки Репозитория и Вью, проинициализированные строкой выше
-        presenter = SearchPresenter(viewContract, repository)
+        presenter = SearchPresenter(repository)
     }
 
     @Test //Проверим вызов метода searchGitHub() у нашего Репозитория
@@ -149,4 +149,27 @@ class SearchPresenterTest {
         //Убеждаемся, что ответ от сервера обрабатывается корректно
         verify(viewContract, times(1)).displaySearchResults(searchResults, 101)
     }
+	@Test
+	fun onAttach_Test() {
+		presenter.onAttach(viewContract)
+		val instance = presenter.javaClass
+		instance.declaredFields.forEach {
+			it.isAccessible = true
+			if (it.name == "view") {
+				assertEquals(viewContract, it.get(presenter))
+			}
+		}
+	}
+
+	@Test
+	fun onDetach_Test(){
+		presenter.onDetach()
+		val instance = presenter.javaClass
+		instance.declaredFields.forEach {
+			it.isAccessible = true
+			if (it.name == "view") {
+				assertNull(it.get(presenter))
+			}
+		}
+	}
 }
