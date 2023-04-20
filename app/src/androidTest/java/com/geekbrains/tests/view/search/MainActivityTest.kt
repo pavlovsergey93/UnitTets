@@ -66,7 +66,6 @@ class MainActivityTest {
 	fun activityEditText_IsDisplayingAtLeast_Test() {
 		val assertion = matches(ViewMatchers.isDisplayingAtLeast(100))
 		onView(withId(R.id.searchEditText)).check(assertion)
-
 	}
 
 	@Test
